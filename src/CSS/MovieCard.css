@@ -1,0 +1,139 @@
+
+/* 1. THE GRID CONTAINER */
+.movie-grid {
+  display: grid;
+  /* Automatically fits as many cards as possible, minimum 180px wide each */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 2. THE MOVIE CARD (Fixed sizing) */
+.movie-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Spans the width of its grid cell */
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+}
+
+.movie-poster {
+  position: relative;
+  aspect-ratio: 2/3; /* Keeps the standard movie poster dimensions */
+  width: 100%;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.8)
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: white;
+  font-size: 1.3rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.favorite-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.favorite-btn.active {
+  color: #ff4757;
+}
+
+.rating-select {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.movie-info {
+  padding: 0.85rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.movie-info h3 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #fff;
+}
+
+.movie-info p {
+  color: #999;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.user-rating {
+  color: #ffd700;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .movie-grid {
+    /* Two distinct columns on tiny phone screens */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .movie-info h3 {
+    font-size: 0.85rem;
+  }
+}
